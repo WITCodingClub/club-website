@@ -14,5 +14,6 @@
 			"pattern": "witcc.dev",
 			"custom_domain": true
 		}
-	]
+	],
+	"previews": {}
 }
