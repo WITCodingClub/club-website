@@ -1,42 +1,44 @@
-# club-website
+# Wentworth Coding Club Website
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+The official website for the Wentworth Institute of Technology Coding Club, hosted at [witcc.dev](https://witcc.dev).
 
-## Creating a project
+The site is built with [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5 + TypeScript) and deployed to [Cloudflare Workers](https://developers.cloudflare.com/workers/) using the SvelteKit Cloudflare adapter.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) 20.19 or newer (required by Vite 7)
+- npm (comes with Node.js)
+- Recommended editor extension: [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode)
+
+## Getting Started
+
+Clone the repository and install dependencies:
 
 ```sh
-# create a new project
-npx sv create my-app
-```
-
-To recreate this project with the same configuration:
-
-```sh
-# recreate this project
-npx sv@0.12.5 create --template minimal --types ts --install npm ./
+git clone <repository-url>
+cd club-website
+npm i
 ```
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Start the local development server with hot reloading:
 
 ```sh
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+The site will be available at [http://localhost:5173](http://localhost:5173). To open it in your browser automatically, run `npm run dev -- --open`.
 
-To create a production version of your app:
+### Project Structure
 
-```sh
-npm run build
-```
+| Path                 | Purpose                                            |
+| -------------------- | -------------------------------------------------- |
+| `src/routes/`        | Pages and layouts (file-based routing)             |
+| `src/lib/`           | Shared components, utilities, and assets           |
+| `src/app.html`       | HTML template wrapping every page                  |
+| `static/`            | Static files served as-is (e.g. `robots.txt`)      |
+| `svelte.config.js`   | SvelteKit configuration                            |
+| `wrangler.jsonc`     | Cloudflare Workers deployment configuration        |
 
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+To add a new page, create a `+page.svelte` file in a folder under `src/routes/`. For example, `src/routes/events/+page.svelte` is served at `/events`.
