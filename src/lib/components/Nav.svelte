@@ -1,45 +1,70 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { afterNavigate } from '$app/navigation';
 	import logo from '$lib/assets/witcc_logo.png';
+	import { isActivePath, navLinks, type NavLink } from '$lib/site';
 
-	const links = [
-		{ href: '/', label: 'Home' },
-		{ href: '/projects', label: 'Projects' },
-		{ href: '/events', label: 'Events' },
-		{ href: '/contact', label: 'Contact' }
-	];
+	interface Props {
+		links?: NavLink[];
+	}
+
+	let { links = navLinks }: Props = $props();
 
 	let menuOpen = $state(false);
+	let menuButton: HTMLButtonElement | undefined = $state();
 
-	// Close the mobile menu whenever the route changes.
-	afterNavigate(() => {
+	const pathname = $derived(page.url.pathname);
+
+	// Close the mobile menu after each navigation.
+	$effect(() => {
+		void pathname;
 		menuOpen = false;
 	});
 
-	function isActive(href: string) {
-		const path = page.url.pathname;
-		return href === '/' ? path === '/' : path === href || path.startsWith(`${href}/`);
+	function closeMenu(returnFocus = false) {
+		menuOpen = false;
+		if (returnFocus) menuButton?.focus();
+	}
+
+	function onKeydown(event: KeyboardEvent) {
+		if (event.key === 'Escape' && menuOpen) closeMenu(true);
 	}
 </script>
 
-<svelte:window onkeydown={(e) => e.key === 'Escape' && (menuOpen = false)} />
+<svelte:window onkeydown={onKeydown} />
 
-<header class="bar">
-	<div class="container">
-		<a class="brand" href="/">
-			<img src={logo} alt="WIT Coding Club logo" width="64" height="64" />
+<header class="nav">
+	<div class="flex h-[var(--nav-height)] w-full items-center justify-between gap-6 px-gutter">
+		<a href="/" class="nav__home label-bar">
+			<img src={logo} alt="" width="64" height="64" class="size-[var(--logo-size)]" />
 			<span>Wentworth Coding Club</span>
 		</a>
 
+		<nav aria-label="Main" class="hidden md:block">
+			<ul class="flex gap-4">
+				{#each links as link (link.href)}
+					<li>
+						<a
+							href={link.href}
+							class="nav__link label-bar"
+							aria-current={isActivePath(pathname, link.href) ? 'page' : undefined}
+						>
+							{link.label}
+						</a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+
 		<button
-			class="menu-toggle"
+			bind:this={menuButton}
+			type="button"
+			class="nav__toggle"
 			aria-expanded={menuOpen}
-			aria-controls="main-nav"
-			aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+			aria-controls="nav-menu"
 			onclick={() => (menuOpen = !menuOpen)}
 		>
-			<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+			<span class="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
+			<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" fill="none">
 				{#if menuOpen}
 					<path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
 				{:else}
@@ -47,15 +72,18 @@
 				{/if}
 			</svg>
 		</button>
+	</div>
 
-		<nav id="main-nav" aria-label="Main" class:open={menuOpen}>
-			<ul>
+	<div id="nav-menu" class="nav__menu" hidden={!menuOpen}>
+		<nav aria-label="Main mobile">
+			<ul class="flex flex-col pb-4">
 				{#each links as link (link.href)}
 					<li>
 						<a
 							href={link.href}
-							class:active={isActive(link.href)}
-							aria-current={isActive(link.href) ? 'page' : undefined}
+							class="nav__link nav__link--mobile"
+							aria-current={isActivePath(pathname, link.href) ? 'page' : undefined}
+							onclick={() => closeMenu()}
 						>
 							{link.label}
 						</a>
@@ -67,109 +95,79 @@
 </header>
 
 <style>
-	.bar {
-		background: var(--bar-bg);
+	.nav {
+		position: relative;
+		z-index: 50;
+		background: var(--bg-bar);
+		color: var(--text-ink);
 	}
 
-	.container {
-		display: flex;
-		flex-wrap: wrap;
+	.nav__home {
+		display: inline-flex;
 		align-items: center;
-		justify-content: space-between;
-		gap: 1rem;
-		padding: 1rem var(--gutter);
-	}
-
-	.brand {
-		display: flex;
-		align-items: center;
-		gap: 1.25rem;
-		font-size: 1.5rem;
+		gap: 0.75rem;
 		color: inherit;
 		text-decoration: none;
 	}
 
-	.brand img {
-		display: block;
-	}
-
-	ul {
-		display: flex;
-		gap: 1rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	nav a {
-		font-size: 1.5rem;
-		color: inherit;
+	.nav__link {
+		color: var(--text-ink);
 		text-decoration: none;
-		text-underline-offset: 0.3em;
 		text-decoration-thickness: 2px;
+		text-underline-offset: 0.3em;
 	}
 
-	nav a:hover {
+	.nav__link:hover {
 		text-decoration-line: underline;
 	}
 
-	nav a.active {
+	.nav__link[aria-current='page'] {
 		font-weight: 700;
 		text-decoration-line: underline;
 	}
 
-	.menu-toggle {
-		display: none;
-		place-items: center;
-		width: 2.75rem;
-		height: 2.75rem;
+	.nav__link--mobile {
+		display: block;
+		padding: 0.75rem 0;
+		font-size: 1.25rem;
+	}
+
+	.nav__toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
 		padding: 0;
 		border: none;
-		border-radius: 0.75rem;
-		background: none;
-		color: inherit;
+		border-radius: var(--radius-button);
+		background: transparent;
+		color: var(--text-ink);
 		cursor: pointer;
 	}
 
-	.menu-toggle:hover,
-	.menu-toggle:focus-visible {
-		background: rgb(0 0 0 / 0.1);
+	.nav__toggle:hover {
+		background: var(--accent-hover);
 	}
 
-	@media (max-width: 760px) {
-		.brand {
-			gap: 0.75rem;
-			font-size: 1.1rem;
+	.nav__menu {
+		margin: 0 var(--space-gutter);
+		border-top: 1px solid var(--border-subtle);
+	}
+
+	.nav__menu[hidden] {
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		.nav__home {
+			gap: 1.25rem;
 		}
 
-		.brand img {
-			width: 48px;
-			height: 48px;
-		}
-
-		.menu-toggle {
-			display: grid;
-		}
-
-		nav {
+		/* Scoped styles beat the md:hidden utility, so hide the mobile parts here. */
+		.nav__toggle,
+		.nav__menu {
 			display: none;
-			flex-basis: 100%;
-		}
-
-		nav.open {
-			display: block;
-		}
-
-		ul {
-			flex-direction: column;
-			gap: 0;
-			border-top: 1px solid rgb(0 0 0 / 0.15);
-		}
-
-		nav a {
-			display: block;
-			padding: 0.75rem 0;
-			font-size: 1.25rem;
 		}
 	}
 </style>

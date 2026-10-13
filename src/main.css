@@ -1,0 +1,87 @@
+@import 'tailwindcss';
+
+/*
+ * WIT Coding Club design tokens.
+ * Naming rule: <role>-<name> (bg-bar, text-ink). Utilities get the same name
+ * through the theme bridge below (bg-bg-bar, text-text-ink).
+ * Pages and components must use these tokens. Do not hard-code hex values.
+ */
+
+:root {
+	color-scheme: light;
+
+	/* Color */
+	--bg-page: #ffffff;
+	--bg-bar: #a4c4f7;
+	--text-ink: #000000;
+	--text-muted: #4a4a4a;
+	--accent-hover: rgb(0 0 0 / 0.1);
+	--border-subtle: rgb(0 0 0 / 0.15);
+
+	/* Layout */
+	--content-max: 1300px;
+	--space-gutter: 1rem;
+	--space-section: 3rem;
+	--nav-height: 80px;
+	--logo-size: 48px;
+}
+
+@media (min-width: 768px) {
+	:root {
+		--nav-height: 96px;
+		--space-gutter: 2.5rem;
+		--space-section: 4rem;
+		--logo-size: 64px;
+	}
+}
+
+/*
+ * Fonts and radii. Tailwind emits these on :root too, so var(--font-mono)
+ * works in plain CSS. Utilities: font-mono, rounded-pill, rounded-button.
+ */
+@theme static {
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	--radius-pill: 999px;
+	--radius-button: 0.75rem;
+}
+
+/*
+ * Tailwind theme bridge. Utilities read the tokens above, for example
+ * bg-bg-bar, text-text-ink, px-gutter, py-section, max-w-content.
+ */
+@theme inline {
+	--color-bg-page: var(--bg-page);
+	--color-bg-bar: var(--bg-bar);
+	--color-text-ink: var(--text-ink);
+	--color-text-muted: var(--text-muted);
+	--color-accent-hover: var(--accent-hover);
+	--color-border-subtle: var(--border-subtle);
+
+	--spacing-gutter: var(--space-gutter);
+	--spacing-section: var(--space-section);
+	--container-content: var(--content-max);
+}
+
+/* Text styles. Sizes scale down on small screens. */
+@utility display-l {
+	font-family: var(--font-mono);
+	font-weight: 700;
+	font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.5rem);
+	line-height: 1.15;
+}
+
+@utility display-m {
+	font-family: var(--font-mono);
+	font-weight: 700;
+	font-size: 1.5rem;
+	line-height: 1.2;
+}
+
+/* Bar text: the club name, nav links and footer text. */
+@utility label-bar {
+	font-family: var(--font-mono);
+	font-weight: 400;
+	font-size: clamp(1.1rem, 0.9rem + 0.6vw, 1.5rem);
+	line-height: 1.3;
+}
