@@ -11,20 +11,35 @@
 </script>
 
 <footer class="footer label-bar">
-	<div
-		class="flex w-full flex-col items-start gap-6 px-gutter py-8 md:flex-row md:items-center md:justify-between"
-	>
-		<div class="flex items-center gap-4 md:gap-9">
-			<img src={logo} alt="" width="64" height="64" class="size-[var(--logo-size)]" />
+	<!-- Phones: one row (email left, icons right). The logo and labels show from md up. -->
+	<div class="flex w-full items-center justify-between gap-4 px-gutter py-3 md:gap-6 md:py-8">
+		<div class="flex items-center gap-9">
+			<img src={logo} alt="" width="64" height="64" class="hidden size-[var(--logo-size)] md:block" />
 			<div>
-				<p class="m-0">Contact</p>
-				<a class="footer__link" href="mailto:{email}">{email}</a>
+				<p class="m-0 hidden md:block">Contact</p>
+				<a class="footer__link inline-flex items-center gap-2" href="mailto:{email}">
+					<svg
+						viewBox="0 0 24 24"
+						width="20"
+						height="20"
+						aria-hidden="true"
+						class="shrink-0 md:hidden"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linejoin="round"
+					>
+						<rect x="3" y="5" width="18" height="14" rx="2" />
+						<path d="M3 7l9 6 9-6" />
+					</svg>
+					{email}
+				</a>
 			</div>
 		</div>
 
 		{#if socials.length > 0}
-			<div class="flex items-center gap-3 md:flex-col md:gap-2">
-				<p class="m-0">Follow us</p>
+			<div class="flex items-center md:flex-col md:gap-2">
+				<p class="m-0 hidden md:block">Follow us</p>
 				<ul class="flex gap-2">
 					{#each socials as social (social.href)}
 						<li>
