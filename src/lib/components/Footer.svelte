@@ -45,8 +45,6 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1.5rem;
-		max-width: var(--content-width);
-		margin: 0 auto;
 		padding: 2rem var(--gutter);
 	}
 

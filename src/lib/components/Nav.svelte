@@ -77,8 +77,6 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		max-width: var(--content-width);
-		margin: 0 auto;
 		padding: 1rem var(--gutter);
 	}
 
