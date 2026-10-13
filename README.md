@@ -15,7 +15,7 @@ The site is built with [SvelteKit](https://svelte.dev/docs/kit) (Svelte 5 + Type
 Clone the repository and install dependencies:
 
 ```sh
-git clone <repository-url>
+git clone https://github.com/WITCodingClub/club-website.git
 cd club-website
 npm i
 ```
