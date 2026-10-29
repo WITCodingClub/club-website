@@ -2,6 +2,7 @@
 	import '../main.css';
 	import '../app.css';
 	import favicon from '$lib/assets/witcc_logo.png';
+	import { page } from '$app/state';
 	import { Footer, Nav } from '$lib';
 
 	let { children } = $props();
@@ -18,11 +19,15 @@
 <a href="#main" class="skip-link">Skip to content</a>
 
 <div class="flex min-h-dvh flex-col">
-	<Nav />
+	{#if !page.error}
+		<Nav />
+	{/if}
 	<main id="main" tabindex="-1" class="flex-1 focus:outline-none">
 		{@render children()}
 	</main>
-	<Footer />
+	{#if !page.error}
+		<Footer />
+	{/if}
 </div>
 
 <style>
