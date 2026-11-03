@@ -14,7 +14,7 @@
 	<!-- Phones: one row (email left, icons right). The logo and labels show from md up. -->
 	<div class="flex w-full items-center justify-between gap-4 px-gutter py-3 md:gap-6 md:py-8">
 		<div class="flex items-center gap-9">
-			<img src={logo} alt="" width="64" height="64" class="hidden size-[var(--logo-size)] md:block" />
+			<!-- <img src={logo} alt="" width="64" height="64" class="hidden size-[var(--logo-size)] md:block" /> -->
 			<div>
 				<p class="m-0 hidden md:block">Contact</p>
 				<a class="footer__link inline-flex items-center gap-2" href="mailto:{email}">

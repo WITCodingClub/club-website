@@ -1,0 +1,1 @@
+Comic.TTF is used to ensure fonts are working correctly by making it really obvious

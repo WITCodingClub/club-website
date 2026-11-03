@@ -36,11 +36,11 @@
 	<div class="flex h-[var(--nav-height)] w-full items-center justify-between gap-6 px-gutter">
 		<a href="/" class="nav__home label-bar">
 			<img src={logo} alt="" width="64" height="64" class="size-[var(--logo-size)]" />
-			<span>Wentworth Coding Club</span>
+			<!-- <span>Wentworth Coding Club</span> -->
 		</a>
 
 		<nav aria-label="Main" class="hidden md:block">
-			<ul class="flex gap-4">
+			<ul class="flex gap-8">
 				{#each links as link (link.href)}
 					<li>
 						<a
@@ -124,6 +124,7 @@
 	.nav__link[aria-current='page'] {
 		font-weight: 700;
 		text-decoration-line: underline;
+		color: #FF1000
 	}
 
 	.nav__link--mobile {

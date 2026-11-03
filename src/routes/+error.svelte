@@ -1,4 +1,11 @@
+<!-- Error page -->
+
 <script lang="ts">
+
+	/*
+		Figure out error code and generate corresponding message
+	*/
+
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import logo from '$lib/assets/witcc_logo.png';
@@ -57,14 +64,20 @@
 	const copy = $derived(
 		copyByStatus[page.status] ?? (serverError ? serverFallback : clientFallback)
 	);
+
 	// Only server errors are our bug, so only they ask the visitor to report it.
 	const showSupport = $derived(serverError);
+
 </script>
 
+
+<!-- Title -->
 <svelte:head>
 	<title>{copy.title} | WIT Coding Club</title>
 </svelte:head>
 
+
+<!-- HTML content -->
 <!-- +layout.svelte hides the Nav and Footer on this page, so it fills the screen. -->
 <section
 	class="flex min-h-dvh items-center bg-bg-error px-gutter py-section font-code text-text-ink"
@@ -93,6 +106,8 @@
 	</div>
 </section>
 
+
+<!-- Page-specific CSS -->
 <style>
 	.error__link {
 		font-weight: 500;
