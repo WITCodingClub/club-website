@@ -11,8 +11,8 @@
 	color-scheme: light;
 
 	/* Color */
-	--bg-page: #ffffff;
-	--bg-bar: #a4c4f7;
+	--bg-page: #ffc708;
+	--bg-bar: #ffc708;
 	--bg-error: #ffc708;
 	--text-ink: #000000;
 	--text-muted: #4a4a4a;
@@ -20,7 +20,7 @@
 	--border-subtle: rgb(0 0 0 / 0.15);
 
 	/* Layout */
-	--content-max: 1300px;
+	--content-max: 50vw;
 	--space-gutter: 1rem;
 	--space-section: 3rem;
 	--nav-height: 80px;
@@ -36,12 +36,68 @@
 	}
 }
 
+
+
+/*
+ * Font imports - JetBrains Mono
+ */
+
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('lib/assets/fonts/JBMono.ttf');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('lib/assets/fonts/JBMonoMed.ttf');
+	font-weight: 500;
+}
+@font-face {
+	font-family: 'JetBrains Mono';
+	src: url('lib/assets/fonts/JBMonoBold.ttf');
+	font-weight: 700;
+}
+
+
+
+/*
+ * Font imports - Helvetica
+ */
+
+@font-face {
+	font-family: 'Helvetica';
+	src: url('lib/assets/fonts/Helv.ttf');
+	font-weight: 400;
+}
+@font-face {
+	font-family: 'Helvetica';
+	src: url('lib/assets/fonts/HelvBold.ttf');
+	font-weight: 700;
+}
+
+
+
+/*
+ * Font imports - Google Sans Code
+ */
+
+@font-face {
+	font-family: 'Google Sans Code';
+	src: url('lib/assets/fonts/SansCode.ttf');
+	font-weight: 400;
+}
+
+
+
 /*
  * Fonts and radii. Tailwind emits these on :root too, so var(--font-mono)
  * works in plain CSS. Utilities: font-mono, font-code, rounded-pill, rounded-button.
  */
+
+
 @theme static {
 	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font-helv: 'Helvetica', ui-monospace, SFMono-Regular, Menlo, monospace;
 	--font-code: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace;
 
 	--radius-pill: 999px;
