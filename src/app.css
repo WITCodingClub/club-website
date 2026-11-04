@@ -15,7 +15,7 @@ body {
 	padding: 0;
 	background: var(--bg-page);
 	color: var(--text-ink);
-	font-family: var(--font-helv);
+	font-family: var(--font-intr);
 	font-size: 1rem;
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
