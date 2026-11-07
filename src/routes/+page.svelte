@@ -13,10 +13,12 @@
 <!-- HTML -->
 <Section>
 	<h1 class="display-l m-0">We're the WIT<br>Coding Club</h1>
-	<p class='homeParagraph'>Our purpose is to bring together a community of students who are interested and motivated in practicing their programming abilities. We're open to all students across the COF.
-	<br>
-	<!-- TODO: Write script that updates the meeting time -->
-	<br>Our next meeting will be 0/00, 0:00 PM at Beatty 000.</p>
+	<p class='homeParagraph'>
+		Our purpose is to bring together a community of students who are interested and motivated in practicing their programming abilities. We're open to all students across the COF.
+		<br>
+		<!-- TODO: Write script that updates the meeting time -->
+		<!-- <br>Our next meeting will be 0/00, 0:00 PM at Beatty 000. -->
+	</p>
 </Section>
 
 
