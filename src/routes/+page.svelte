@@ -33,5 +33,18 @@
 		margin-top: 40px;
 		font-size: 1.5em;
 	}
+
+
+	@media (max-width: 768px) {
+		
+		h1 {
+			font-size: 3em;
+		}
+
+		.homeParagraph {
+			font-size: 1em;
+		}
+
+	}
 	
 </style>
