@@ -1,4 +1,12 @@
+<!-- HTML used across every page that the actual content is inserted into -->
+
+
 <script lang="ts">
+
+	/*
+		Import shared styles and layout components for every page
+	*/
+	
 	import '../main.css';
 	import '../app.css';
 	import favicon from '$lib/assets/witcc_logo.png';
@@ -6,8 +14,11 @@
 	import { Footer, Nav } from '$lib';
 
 	let { children } = $props();
+
 </script>
 
+
+<!-- Title + description + etc -->
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<title>WIT Coding Club</title>
@@ -16,8 +27,11 @@
 	<meta name="author" content="WITCC">
 </svelte:head>
 
+
 <a href="#main" class="skip-link">Skip to content</a>
 
+
+<!-- Insert webpage -->
 <div class="flex min-h-dvh flex-col">
 	{#if !page.error}
 		<Nav />
@@ -30,6 +44,8 @@
 	{/if}
 </div>
 
+
+<!-- CSS -->
 <style>
 	.skip-link {
 		position: absolute;

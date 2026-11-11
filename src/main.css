@@ -11,8 +11,8 @@
 	color-scheme: light;
 
 	/* Color */
-	--bg-page: #ffffff;
-	--bg-bar: #a4c4f7;
+	--bg-page: #ffc708;
+	--bg-bar: #ffc708;
 	--bg-error: #ffc708;
 	--text-ink: #000000;
 	--text-muted: #4a4a4a;
@@ -20,7 +20,7 @@
 	--border-subtle: rgb(0 0 0 / 0.15);
 
 	/* Layout */
-	--content-max: 1300px;
+	--content-max: calc(100vw - 100px);
 	--space-gutter: 1rem;
 	--space-section: 3rem;
 	--nav-height: 80px;
@@ -33,15 +33,22 @@
 		--space-gutter: 2.5rem;
 		--space-section: 4rem;
 		--logo-size: 64px;
+
+		--content-max: 50vw;
 	}
 }
+
+
 
 /*
  * Fonts and radii. Tailwind emits these on :root too, so var(--font-mono)
  * works in plain CSS. Utilities: font-mono, font-code, rounded-pill, rounded-button.
  */
+
+
 @theme static {
 	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+	--font-intr: 'Inter', ui-monospace, SFMono-Regular, Menlo, monospace;
 	--font-code: 'Google Sans Code', ui-monospace, SFMono-Regular, Menlo, monospace;
 
 	--radius-pill: 999px;
