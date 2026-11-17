@@ -1,6 +1,14 @@
 <script lang="ts">
+    import projects from './data/projects.json'
     import { Section } from '$lib';
 </script>
+
+{#each projects as project}
+    <h1>{project.title}</h1>
+    <h2>{project.description}</h2>
+    <a href={project.link}>{project.link}</a>
+    <a href={project.github}>{project.github}</a>
+{/each}
 
 <Section>
     <h1 class="display-l m-0">Projects</h1>
