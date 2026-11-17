@@ -81,6 +81,15 @@
 	line-height: 1.15;
 }
 
+/* Giving subheaders space for text underneath */
+@utility display-subheader {
+	font-family: var(--font-mono);
+	font-weight: 700;
+	font-size: clamp(1.35rem, 1.3rem + 1.6vw, 2.0rem);
+	line-height: 1.15;
+	margin-bottom: 8px;
+}
+
 @utility display-m {
 	font-family: var(--font-mono);
 	font-weight: 700;
